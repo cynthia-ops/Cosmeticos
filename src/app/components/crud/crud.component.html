@@ -1,0 +1,82 @@
+<div style="text-align: center;">
+
+    <h2>Inventario de Cosmeticos</h2>
+  
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-info">
+          <th>ID</th>
+          <th>Marca</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>Accones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tableS" *ngFor="let item of collection.data | paginate: config">
+          <td >{{item.id}}</td>
+          <td >{{item.marca}}</td>
+          <td >{{item.descripcion}}</td>
+          <td >{{item.precio}}</td>
+          <td>
+            <button type="button" class="btn btn-danger"(click)="eliminar(item)">Eliminar</button>
+            <button type="button" class="btn btn-primary"(click)="editarProducto(content,item)">Editar</button>
+          </td>
+            
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+    <div class="botones">
+      <button type="button" class="btn btn-success m-5" (click)="nuevoProducto(content)">Nuevo Producto</button>
+     </div>
+  
+  
+  <!-- Todo esto es el html del Modal (ventana emergente) -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Crear/Actualizar Producto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <!-- editamos formulario con los atributos que deseemos -->
+            <form [formGroup]="prodForm">
+
+              <div class="form-group">
+                <strong><label for="">ID</label></strong><!-- eqtiqueta para identificar valor -->
+                <input type="number" formControlName="id" class="form-control">
+                <!-- input para capturar datos ademas de las clases necesarias para poder controlar e idenficar los valores-->
+              </div>
+  
+              <div class="form-group">
+                <strong><label for="">Marca</label></strong>
+                <input type="text" formControlName="marca" class="form-control">
+              </div>
+   
+              <div class="from-group">
+                <strong><label for="">Descripcion</label></strong>
+                <input type="text" formControlName="descripcion" class="form-control">
+              </div>
+
+              <div class="from-group">
+                <strong><label for="">Precio</label></strong>
+                <input type="text" formControlName="precio" class="form-control">
+              </div>
+   
+            </form>
+           </div>
+        </form>
+      </div>
+      <!-- creamos  un div para los botones disponibles (guardar o Actualizar dependiendo del caso)-->
+      <div class="modal-footer">
+        <button *ngIf="updSave==false" type="button" class="btn btn-outline-dark" (click)="guardar()">Guardar</button>
+        <button *ngIf="updSave==true" type="button" class="btn btn-outline-dark" (click)="actualizar()">Actualizar</button>
+      </div>
+    </ng-template>
+  
+  </div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cosmeticos-6447d": {
+      "hosting": {
+        "cosmeticos": [
+          "cosmeticos-6447d"
+        ]
+      }
+    }
+  }
+}
